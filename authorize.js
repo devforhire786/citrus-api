@@ -62,8 +62,11 @@ function updateSubscription(subData,callback) {
 		else{
 			console.log('Null Response.');
 		}
-		//send email notification
-		utils.sendEmailNotification('Subscription Update', 'The subscription has been updated successfully.', function(err){
+		//send email notification contain payment structure and response
+		utils.sendEmailNotification('Subscription Update', JSON.stringify({
+			subscriptionId: subData.subcriptionId,
+			response: response
+		}), function(err){
 			if(err){
 				console.log('Error sending email notification: ' + err);
 			}
